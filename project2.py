@@ -9,10 +9,11 @@ def data_cleaning(data):
     newfile = "Bronx.csv"
     fileobject = open(newfile, "w")
     new_data = data[(data.BOROUGH == 'BRONX')]
+    new_data = new_data.drop("BOROUGH", axis=1)
+    new_data = new_data.drop("LOCATION", axis=1)
+    print(new_data.shape)
     with pd.option_context('display.max_rows', None, 'display.max_columns', None):
         fileobject.write(str(new_data))
-
-
 
 
 def main():
