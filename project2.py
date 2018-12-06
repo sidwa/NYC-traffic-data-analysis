@@ -7,14 +7,11 @@ def readfile(filename):
 
 def data_cleaning(data):
     newfile = "Bronx.csv"
-    fileobject = open(newfile, "w")
     new_data = data[(data.BOROUGH == 'BRONX')]
     new_data = new_data.drop("BOROUGH", axis=1)
     new_data = new_data.drop("LOCATION", axis=1)
     print(new_data.shape)
-    with pd.option_context('display.max_rows', None, 'display.max_columns', None):
-        fileobject.write(str(new_data))
-
+    new_data.to_csv(newfile)
 
 def main():
     data = readfile("NYPD_Motor_Vehicle_Collisions.csv")
