@@ -79,7 +79,7 @@ def data_cleaning(data):
 	#Data is now in 1 normal form.
 
 	# pandas require numpy logical op functions for logical and/or operations
-	new_data = new_data[np.logical_and(np.logical_or(new_data.MONTH == 7, new_data.MONTH == 8), \
+	new_data = new_data[np.logical_and(np.logical_or(new_data.MONTH == 6, new_data.MONTH ==7), \
 		np.logical_or(new_data.YEAR == 2017, new_data.YEAR == 2018 ))]
 	new_data.to_csv(newfile)
 
