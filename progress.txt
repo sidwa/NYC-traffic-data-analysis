@@ -1,0 +1,16 @@
+TODO:
+-heatmap of accidents.
+-visualize on KML.
+-consolidate points in proximity and change pin color of points based on num
+	accidents in the loc
+
+Done:
+found accidents month by month.
+more or less the same 
+July 2017 has about 300 accidents fewer.
+
+Plotting accidents by time. Most accidents occur during business hours.
+oddly most accidents happen at 2pm, Siesta time?
+
+what next:
+Find when accidents happen based on cause of accident.

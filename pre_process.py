@@ -83,44 +83,9 @@ def data_cleaning(data):
 		np.logical_or(new_data.YEAR == 2017, new_data.YEAR == 2018 ))]
 	new_data.to_csv(newfile)
 
-	#getting the latitudes and longitudes to form the coordinate system
-	lat_col = data.iloc[:,1]
-	lon_col = data.iloc[:,2]
-	lat_col = list(lat_col)
-	lon_col = list(lon_col)
-	return lat_col, lon_col
-
-def kml_generation(lat, long):
-	mystr = ''
-	mystr = mystr + '<?xml version="1.0" encoding="UTF-8"?>\n<kml xmlns = "http://www.opengis.net/kml/2.2">\n\
-	    <Document>\n\
-	    <Style id="yellowPoly">\n\
-	        <LineStyle>\n\
-	            <color>Af00ffff</color>\n\
-	            <width>6</width>\n\
-	        </LineStyle>\n\
-	        <PolyStyle>\n\
-	            <color>7f00ff00</color>\n\
-	        </PolyStyle>\n\
-	    </Style>\n\
-	    <Placemark><styleUrl>#yellowPoly</styleUrl>\n\
-	    <LineString>\n\
-	    <Description>Speed in MPH, not altitude.</Description>\n\
-	    <extrude> 1 </extrude>\n\
-	    <tesselate> 1 </tesselate>\n\
-	    <altitudeMode> clamp to ground </altitudeMode>\n\
-	    <coordinates>'
-	for i in range(len(lat)):
-		mystr = mystr + "\t\t" + str(long[i]) + "," + str(lat[i]) + "\n"
-	mystr = mystr + '</coordinates>\n </LineString>\n </Placemark>\n </Document>\n </kml>'
-	file = open("Bronx_location.kml", "w")
-	file.write(mystr)
-	file.close()
-
 def main():
 	data = readfile("data_set.csv")
-	lat, long = data_cleaning(data)
-	kml_generation(lat, long)
+	data_cleaning(data)
 
 if __name__ == '__main__':
 	main()
