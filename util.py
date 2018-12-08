@@ -15,7 +15,7 @@ def readfile(filename):
 	return data
 
 
-def kml_generation(lat, long):
+def kml_generation(filename, lat, long):
 	count = 0.0
 	count = float(count)
 	mystr = ''
@@ -39,6 +39,6 @@ def kml_generation(lat, long):
 	                </Point>\n\
 	                </Placemark>'
 	mystr = mystr + '</Document>\n </kml>'
-	file = open("Bronx_location.kml", "w")
+	file = open(filename, "w")
 	file.write(mystr)
 	file.close()

@@ -16,16 +16,16 @@ oddly most accidents happen at 2pm, Siesta time?
 what next:
 Find when accidents happen based on cause of accident.
 
+more than 2 vehicles in an accident get quite rare so trying to 
+find the time when a pile up is most likely to happen is gonna be
+fruit less.
 
-	print(data["CONTRIBUTING FACTOR VEHICLE 1"].unique())
-	print("***********")
-	print(data["CONTRIBUTING FACTOR VEHICLE 2"].unique())
-	print("***********")
-	print(data["CONTRIBUTING FACTOR VEHICLE 3"].unique())
-	print("***********")
-	print(data["CONTRIBUTING FACTOR VEHICLE 4"].unique())
-	print("***********")
-	print(data["CONTRIBUTING FACTOR VEHICLE 5"].unique())
+1 vehicle is rarer than 2 vehicles. prob of 2 ppl being careless should
+be less but that is compensated by sheer number of vehicles present in
+business hours. This along with speed 2 moving entities might be further
+increasing chance of accidents.
+also both need not be responsible for the accident. 
+
 
 unique values for number of vehicles involved in accidents.
 1- dr
@@ -80,3 +80,6 @@ unique values for number of vehicles involved in accidents.
 
  5-dr
  [nan 'Unspecified' 'Other Vehicular' 'Unsafe Lane Changing']
+
+ caveat different vehicles have diff causes. the 5th vehicle may not be last
+ vehicle in accident.
