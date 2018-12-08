@@ -3,6 +3,7 @@ TODO:
 -visualize on KML.
 -consolidate points in proximity and change pin color of points based on num
 	accidents in the loc
+-find most dangerous spots based on ppl killed or injured.
 
 Done:
 found accidents month by month.
@@ -14,3 +15,68 @@ oddly most accidents happen at 2pm, Siesta time?
 
 what next:
 Find when accidents happen based on cause of accident.
+
+
+	print(data["CONTRIBUTING FACTOR VEHICLE 1"].unique())
+	print("***********")
+	print(data["CONTRIBUTING FACTOR VEHICLE 2"].unique())
+	print("***********")
+	print(data["CONTRIBUTING FACTOR VEHICLE 3"].unique())
+	print("***********")
+	print(data["CONTRIBUTING FACTOR VEHICLE 4"].unique())
+	print("***********")
+	print(data["CONTRIBUTING FACTOR VEHICLE 5"].unique())
+
+unique values for number of vehicles involved in accidents.
+1- dr
+['Unspecified' 'Unsafe Speed' 'Other Vehicular' 'Following Too Closely'
+ 'Backing Unsafely' 'Steering Failure' 'Driver Inattention/Distraction'
+ 'Driver Inexperience' 'Oversized Vehicle' 'Turning Improperly'
+ 'View Obstructed/Limited' 'Reaction to Uninvolved Vehicle'
+ 'Passing Too Closely' 'Other Electronic Device' 'Alcohol Involvement'
+ 'Pedestrian/Bicyclist/Other Pedestrian Error/Confusion'
+ 'Failure to Yield Right-of-Way' 'Outside Car Distraction'
+ 'Passing or Lane Usage Improper' 'Fell Asleep' 'Tire Failure/Inadequate'
+ 'Traffic Control Disregarded' 'Glare' 'Lane Marking Improper/Inadequate'
+ 'Unsafe Lane Changing' 'Fatigued/Drowsy' 'Obstruction/Debris'
+ 'Failure to Keep Right' 'Physical Disability' 'Brakes Defective'
+ 'Cell Phone (hand-Held)' nan 'Pavement Slippery'
+ 'Aggressive Driving/Road Rage' 'Animals Action' 'Lost Consciousness'
+ 'Passenger Distraction' 'Pavement Defective' 'Driverless/Runaway Vehicle'
+ 'Tinted Windows' 'Accelerator Defective' 'Drugs (illegal)'
+ 'Shoulders Defective/Improper' 'Vehicle Vandalism' 'Illnes'
+ 'Reaction to Other Uninvolved Vehicle' 'Cell Phone (hand-held)' 'Illness'
+ 'Tow Hitch Defective' 'Drugs (Illegal)'
+ 'Traffic Control Device Improper/Non-Working' 'Cell Phone (hands-free)'
+ 'Other Lighting Defects' 'Prescription Medication']
+
+ 2-dr
+ [nan 'Unspecified' 'Other Vehicular' 'Following Too Closely'
+ 'Backing Unsafely' 'Failure to Yield Right-of-Way'
+ 'Driver Inattention/Distraction' 'Passing Too Closely'
+ 'Passing or Lane Usage Improper'
+ 'Pedestrian/Bicyclist/Other Pedestrian Error/Confusion'
+ 'View Obstructed/Limited' 'Turning Improperly'
+ 'Traffic Control Disregarded' 'Lane Marking Improper/Inadequate'
+ 'Unsafe Lane Changing' 'Aggressive Driving/Road Rage' 'Oversized Vehicle'
+ 'Unsafe Speed' 'Driver Inexperience' 'Alcohol Involvement'
+ 'Pavement Defective' 'Reaction to Uninvolved Vehicle' 'Pavement Slippery'
+ 'Failure to Keep Right' 'Brakes Defective' 'Glare'
+ 'Outside Car Distraction' 'Obstruction/Debris' 'Illnes' 'Fell Asleep'
+ 'Cell Phone (hand-Held)' 'Accelerator Defective' 'Passenger Distraction'
+ 'Reaction to Other Uninvolved Vehicle' 'Tow Hitch Defective'
+ 'Fatigued/Drowsy' 'Other Lighting Defects' 'Lost Consciousness']
+
+ 3-dr
+ [nan 'Unspecified' 'Following Too Closely'
+ 'Driver Inattention/Distraction' 'Other Vehicular'
+ 'Reaction to Uninvolved Vehicle' 'Brakes Defective' 'Passing Too Closely'
+ 'Failure to Yield Right-of-Way' 'Animals Action'
+ 'View Obstructed/Limited' 'Pavement Defective']
+ 
+ 4-dr
+ [nan 'Unspecified' 'Other Vehicular' 'Following Too Closely'
+ 'Reaction to Other Uninvolved Vehicle']
+
+ 5-dr
+ [nan 'Unspecified' 'Other Vehicular' 'Unsafe Lane Changing']
