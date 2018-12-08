@@ -14,14 +14,10 @@ def readfile(filename):
 	data = pd.read_csv(filename, delimiter=',', low_memory=False)
 	return data
 
-def kml_generation(lat, lon):
-	"""
-		Given a list of latitude and longitude generates KML file for visualization on google earth.
-		Name of KML file is bronx_location.kml
 
-		:param lat: list of latitude values
-		:param lon: list of longitude values
-	"""
+def kml_generation(lat, long):
+	count = 0.0
+	count = float(count)
 	mystr = ''
 	mystr = mystr + '<?xml version="1.0" encoding="UTF-8"?>\n<kml xmlns = "http://www.opengis.net/kml/2.2">\n\
 	    <Document>\n\
@@ -33,17 +29,16 @@ def kml_generation(lat, lon):
 	        <PolyStyle>\n\
 	            <color>7f00ff00</color>\n\
 	        </PolyStyle>\n\
-	    </Style>\n\
-	    <Placemark><styleUrl>#yellowPoly</styleUrl>\n\
-	    <LineString>\n\
-	    <Description>Speed in MPH, not altitude.</Description>\n\
-	    <extrude> 1 </extrude>\n\
-	    <tesselate> 1 </tesselate>\n\
-	    <altitudeMode> clamp to ground </altitudeMode>\n\
-	    <coordinates>'
+	    </Style>\n'
+
 	for i in range(len(lat)):
-		mystr = mystr + "\t\t" + str(lon[i]) + "," + str(lat[i]) + "\n"
-	mystr = mystr + '</coordinates>\n </LineString>\n </Placemark>\n </Document>\n </kml>'
-	file = open("bronx_location.kml", "w")
+		mystr = mystr + '<Placemark>\n\
+	                <description>Default Pin is Yellow</description>\n\
+	                <Point>\n\
+	                <coordinates>' + str(long[i]) + ", " + str(lat[i]) + ", " + str(count) + '</coordinates>\n\
+	                </Point>\n\
+	                </Placemark>'
+	mystr = mystr + '</Document>\n </kml>'
+	file = open("Bronx_location.kml", "w")
 	file.write(mystr)
 	file.close()
