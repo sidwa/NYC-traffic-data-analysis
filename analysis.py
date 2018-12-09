@@ -7,7 +7,8 @@ from util import readfile,kml_generation
 
 data = readfile("bronx.csv")
 
-# =============================================Overall stats======================================
+# =============================================Overall
+# stats======================================
 def get_overall_stats():
 	print("Total accidents:", data.shape[0])
 	print("Accidents in June 2017: ", data[np.logical_and(data.MONTH == 6, data.YEAR == 2017)].shape[0])
@@ -16,7 +17,8 @@ def get_overall_stats():
 	print("Accidents in July 2018: ", data[np.logical_and(data.MONTH == 7, data.YEAR == 2018)].shape[0])
 
 
-# ===================================Location of accidents========================================
+# ===================================Location of
+# accidents========================================
 def get_heat_map():
 	lat = data["LATITUDE"]
 	lon = data["LONGITUDE"]
@@ -24,8 +26,9 @@ def get_heat_map():
 
 
 
-# =============Getting number of accidents by the hour stats=======================================
-def get_acc_hour(data, plot = True):
+# =============Getting number of accidents by the hour
+# stats=======================================
+def get_acc_hour(data, plot=True):
 	hours = range(24)
 	num_accidents = []
 	# get the number of accident for each hour of the day.
@@ -41,7 +44,7 @@ def get_acc_hour(data, plot = True):
 
 		# annotate point on the plot
 		for point in zip(hours, num_accidents):
-			ax.annotate( "({0},{1})".format(point[0], point[1]), xy = point, textcoords = "data")
+			ax.annotate("({0},{1})".format(point[0], point[1]), xy = point, textcoords = "data")
 
 		plt.xlabel("Hour of the day")
 		plt.ylabel("Number of accident in the hour")
@@ -52,7 +55,8 @@ def get_acc_hour(data, plot = True):
 
 	return (hours, num_accidents)
 
-# =======================================vehicles involved============================================
+# =======================================vehicles
+# involved============================================
 def vehicles_involved(data, plot=True):
 	"""
 		finds number of accidents involving 1,2,3,4 and 5 vehicles.
@@ -65,14 +69,16 @@ def vehicles_involved(data, plot=True):
 	num_vehicles = {}
 	total_accidents = data.shape[0]
 
-	# creates a binary data frame where value of true is set where nulls were present.
+	# creates a binary data frame where value of true is set where nulls were
+	# present.
 	# not viable since np.logical_and takes only 2 args
 	# bin_frame = data.isnull()
 
 	# accidents with 5 vehicels will def have foll col non null
 	num_vehicles[5] = total_accidents - data["CONTRIBUTING FACTOR VEHICLE 5"].isnull().sum()
 
-	# accidents with 4 vehicle will have have following col and also accidents involving 5 cars.  
+	# accidents with 4 vehicle will have have following col and also accidents
+	# involving 5 cars.
 	num_vehicles[4] = total_accidents - data["CONTRIBUTING FACTOR VEHICLE 4"].isnull().sum() - num_vehicles[5]
 	num_vehicles[3] = total_accidents - data["CONTRIBUTING FACTOR VEHICLE 3"].isnull().sum() - num_vehicles[4] - num_vehicles[5]
 	num_vehicles[2] = total_accidents - data["CONTRIBUTING FACTOR VEHICLE 2"].isnull().sum() - num_vehicles[3] - num_vehicles[4] - num_vehicles[5] 
@@ -92,7 +98,7 @@ def vehicles_involved(data, plot=True):
 
 		# annotate point on the plot
 		for point in zip(range(1,6), accidents):
-			ax.annotate( "({0},{1})".format(point[0], point[1]), xy = point, textcoords = "data")
+			ax.annotate("({0},{1})".format(point[0], point[1]), xy = point, textcoords = "data")
 
 		plt.xlabel("number of vehicles in accident")
 		plt.ylabel("Number of accidents")
@@ -109,21 +115,26 @@ def get_data_n_vehicles(data, num_vehicles):
 		:param num_vehicles: number of vehicles involved in the accident.
 	"""
 	bin_data = data.isnull()
+	#bin_data.to_csv("bin_data.csv")
 	res = pd.DataFrame(columns=data.columns)
+	curr_row = 0
 	for obs_idx, obs_data in data.iterrows():
 		# if num_vehicle cell has value then check further
-		if bin_data.loc[obs_idx, "CONTRIBUTING FACTOR VEHICLE " + str(num_vehicles)]:
+		
+		if not bin_data.loc[obs_idx, "CONTRIBUTING FACTOR VEHICLE " + str(num_vehicles)]:
 			for i in range(num_vehicles + 1,6):
 				# check if more than num_vehicles were involved
-				if bin_data.loc[obs_idx, "CONTRIBUTING FACTOR VEHICLE " + str(i)]:
+
+				if not bin_data.loc[obs_idx, "CONTRIBUTING FACTOR VEHICLE " + str(i)]:
 					#print("break")
 					break
 			else:
 				# more vehicles were not involved, add to new data frame
 				#print("add")
 				#print(obs_data)
-				res.loc[data.index.max() + 1] = obs_data
-				print(data.index)
+				res.loc[curr_row] = obs_data
+				curr_row += 1
+				#print(res.loc[res.shape[0]-1])
 	
 	return res
 
@@ -159,26 +170,40 @@ def get_acc_cause_time(hour, plot = True):
 	
 	dat1 = get_data_n_vehicles(dat, 1)
 	dat1 = dat1.dropna(subset=["CONTRIBUTING FACTOR VEHICLE 1"])
-	print(dat1["HOUR"])
-	print(dat1["CONTRIBUTING FACTOR VEHICLE 1"].unique())#value_counts().max())
+	print("********1******")
+	print(dat1["CONTRIBUTING FACTOR VEHICLE 1"].value_counts())#value_counts().max())
 
 	dat2 = get_data_n_vehicles(dat, 2)
 	dat2 = dat2.dropna(subset=["CONTRIBUTING FACTOR VEHICLE 2"])
-	print(dat2["CONTRIBUTING FACTOR VEHICLE 2"].value_counts().max())
+	print("*******2*******")
+	print(dat2["CONTRIBUTING FACTOR VEHICLE 2"].value_counts())
+	print(dat2["CONTRIBUTING FACTOR VEHICLE 1"].value_counts())
 
 	dat3 = get_data_n_vehicles(dat, 3)
 	dat3 = dat3.dropna(subset=["CONTRIBUTING FACTOR VEHICLE 3"])
-	print(dat3["CONTRIBUTING FACTOR VEHICLE 3"].value_counts().max())
+	print("*******3*******")
+	print(dat3["CONTRIBUTING FACTOR VEHICLE 3"].value_counts())
+	print(dat3["CONTRIBUTING FACTOR VEHICLE 2"].value_counts())
+	print(dat3["CONTRIBUTING FACTOR VEHICLE 1"].value_counts())
 
 	dat4 = get_data_n_vehicles(dat, 4)
 	dat4 = dat4.dropna(subset=["CONTRIBUTING FACTOR VEHICLE 4"])
-	print(dat4["CONTRIBUTING FACTOR VEHICLE 4"].value_counts().max())
+	print("*******4*******")
+	print(dat4["CONTRIBUTING FACTOR VEHICLE 4"].value_counts())
+	print(dat4["CONTRIBUTING FACTOR VEHICLE 3"].value_counts())
+	print(dat4["CONTRIBUTING FACTOR VEHICLE 2"].value_counts())
+	print(dat4["CONTRIBUTING FACTOR VEHICLE 1"].value_counts())
 
 	dat5 = get_data_n_vehicles(dat, 5)
 	dat5 = dat5.dropna(subset=["CONTRIBUTING FACTOR VEHICLE 5"])
-	print(dat5["CONTRIBUTING FACTOR VEHICLE 5"].value_counts().max())
+	print("******5********")
+	print(dat5["CONTRIBUTING FACTOR VEHICLE 5"].value_counts())
+	print(dat5["CONTRIBUTING FACTOR VEHICLE 4"].value_counts())
+	print(dat5["CONTRIBUTING FACTOR VEHICLE 3"].value_counts())
+	print(dat5["CONTRIBUTING FACTOR VEHICLE 2"].value_counts())
+	print(dat5["CONTRIBUTING FACTOR VEHICLE 1"].value_counts())
 
-	return vehicles_involved(dat, plot)
+	#return vehicles_involved(dat, plot)
 
 def acc_time_vehicle():
 	"""
@@ -190,9 +215,9 @@ def acc_time_vehicle():
 	for num_vehicles_involved in range(5,0,-1):
 		acc = []
 		for hour in range(24):
-			acc.append(get_acc_cause_time(hour, False)[num_vehicles_involved-1])
+			acc.append(get_acc_cause_time(hour, False)[num_vehicles_involved - 1])
 
-		plt.plot(range(24), acc, c = colors[num_vehicles_involved-1], label = "Vehicles:" + str(num_vehicles_involved))
+		plt.plot(range(24), acc, c = colors[num_vehicles_involved - 1], label = "Vehicles:" + str(num_vehicles_involved))
 	
 	plt.legend()
 	plt.show()
@@ -213,20 +238,22 @@ def main():
 	get_acc_hour(data)
 
 	#get number of acc hour by hour for june 2017
-	get_acc_hour(data[np.logical_and(data.MONTH==6, data.YEAR==2017)])
+	get_acc_hour(data[np.logical_and(data.MONTH == 6, data.YEAR == 2017)])
 
 	#get number of acc hour by hour for june 2018
-	get_acc_hour(data[np.logical_and(data.MONTH==6, data.YEAR==2018)])
+	get_acc_hour(data[np.logical_and(data.MONTH == 6, data.YEAR == 2018)])
 
 	#get number of acc hour by hour for july 2017
-	get_acc_hour(data[np.logical_and(data.MONTH==7, data.YEAR==2017)])
+	get_acc_hour(data[np.logical_and(data.MONTH == 7, data.YEAR == 2017)])
 
 	#get number of acc hour by hour for july 2018
-	get_acc_hour(data[np.logical_and(data.MONTH==7, data.YEAR==2018)])
+	get_acc_hour(data[np.logical_and(data.MONTH == 7, data.YEAR == 2018)])
 
 	vehicles_involved(data)
 
 	acc_time_vehicle()
+
+	get_acc_cause_time(14)
 
 if __name__ == "__main__":
 	#print(data.index)

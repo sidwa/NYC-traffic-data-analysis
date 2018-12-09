@@ -83,3 +83,168 @@ unique values for number of vehicles involved in accidents.
 
  caveat different vehicles have diff causes. the 5th vehicle may not be last
  vehicle in accident.
+
+contributing factors at 14:00
+
+ ***************
+Unspecified                                              74
+Driver Inattention/Distraction                            8
+Failure to Yield Right-of-Way                             6
+Other Vehicular                                           5
+Backing Unsafely                                          5
+Unsafe Speed                                              4
+Driver Inexperience                                       2
+Unsafe Lane Changing                                      2
+Pedestrian/Bicyclist/Other Pedestrian Error/Confusion     2
+Following Too Closely                                     1
+Passenger Distraction                                     1
+Passing Too Closely                                       1
+View Obstructed/Limited                                   1
+Passing or Lane Usage Improper                            1
+Glare                                                     1
+Name: CONTRIBUTING FACTOR VEHICLE 1, dtype: int64
+***************
+Unspecified                                              331
+Driver Inattention/Distraction                            28
+Other Vehicular                                           19
+Following Too Closely                                      9
+Passing or Lane Usage Improper                             6
+Failure to Yield Right-of-Way                              6
+Aggressive Driving/Road Rage                               3
+Driver Inexperience                                        3
+Unsafe Speed                                               3
+Backing Unsafely                                           2
+View Obstructed/Limited                                    2
+Unsafe Lane Changing                                       2
+Turning Improperly                                         2
+Reaction to Other Uninvolved Vehicle                       1
+Outside Car Distraction                                    1
+Passing Too Closely                                        1
+Passenger Distraction                                      1
+Traffic Control Disregarded                                1
+Reaction to Uninvolved Vehicle                             1
+Pavement Defective                                         1
+Pedestrian/Bicyclist/Other Pedestrian Error/Confusion      1
+Oversized Vehicle                                          1
+Name: CONTRIBUTING FACTOR VEHICLE 2, dtype: int64
+***************
+Unspecified                       14
+Other Vehicular                    1
+Reaction to Uninvolved Vehicle     1
+Name: CONTRIBUTING FACTOR VEHICLE 3, dtype: int64
+***************
+Unspecified    5
+Name: CONTRIBUTING FACTOR VEHICLE 4, dtype: int64
+***************
+Unspecified    1
+Name: CONTRIBUTING FACTOR VEHICLE 5, dtype: int64
+
+contributing factors at 9
+***************
+Unspecified                                              64
+Other Vehicular                                          12
+Backing Unsafely                                          6
+Driver Inattention/Distraction                            5
+Pedestrian/Bicyclist/Other Pedestrian Error/Confusion     2
+Obstruction/Debris                                        1
+Unsafe Speed                                              1
+Passing Too Closely                                       1
+Failure to Yield Right-of-Way                             1
+View Obstructed/Limited                                   1
+Name: CONTRIBUTING FACTOR VEHICLE 1, dtype: int64
+***************
+Unspecified                                              264
+Driver Inattention/Distraction                            22
+Other Vehicular                                           14
+Backing Unsafely                                           7
+Traffic Control Disregarded                                5
+Following Too Closely                                      3
+Oversized Vehicle                                          2
+Passing or Lane Usage Improper                             2
+Unsafe Lane Changing                                       2
+View Obstructed/Limited                                    2
+Turning Improperly                                         1
+Reaction to Other Uninvolved Vehicle                       1
+Pedestrian/Bicyclist/Other Pedestrian Error/Confusion      1
+Pavement Slippery                                          1
+Obstruction/Debris                                         1
+Alcohol Involvement                                        1
+Failure to Yield Right-of-Way                              1
+Passing Too Closely                                        1
+Tow Hitch Defective                                        1
+Name: CONTRIBUTING FACTOR VEHICLE 2, dtype: int64
+***************
+Unspecified              15
+Following Too Closely     1
+Name: CONTRIBUTING FACTOR VEHICLE 3, dtype: int64
+***************
+Unspecified    5
+Name: CONTRIBUTING FACTOR VEHICLE 4, dtype: int64
+***************
+Unspecified    2
+Name: CONTRIBUTING FACTOR VEHICLE 5, dtype: int64
+
+contributing factors at 22:00
+PS E:\acad\BDA\project2\bda_proj2> python .\analysis.py
+***************
+Unspecified                                              39
+Driver Inattention/Distraction                            5
+Other Vehicular                                           4
+Failure to Yield Right-of-Way                             4
+Unsafe Speed                                              1
+Backing Unsafely                                          1
+Obstruction/Debris                                        1
+Turning Improperly                                        1
+Pedestrian/Bicyclist/Other Pedestrian Error/Confusion     1
+Name: CONTRIBUTING FACTOR VEHICLE 1, dtype: int64
+***************
+Unspecified                                              157
+Driver Inattention/Distraction                             9
+Other Vehicular                                            8
+Traffic Control Disregarded                                3
+Pedestrian/Bicyclist/Other Pedestrian Error/Confusion      2
+Unsafe Lane Changing                                       2
+Failure to Yield Right-of-Way                              2
+Unsafe Speed                                               2
+Turning Improperly                                         1
+View Obstructed/Limited                                    1
+Following Too Closely                                      1
+Passing Too Closely                                        1
+Name: CONTRIBUTING FACTOR VEHICLE 2, dtype: int64
+***************
+Unspecified        12
+Other Vehicular     1
+Name: CONTRIBUTING FACTOR VEHICLE 3, dtype: int64
+***************
+Unspecified    3
+Name: CONTRIBUTING FACTOR VEHICLE 4, dtype: int64
+***************
+Unspecified    2
+Name: CONTRIBUTING FACTOR VEHICLE 5, dtype: int64
+
+contributing factors at 4
+***************
+Unspecified                       11
+Driver Inattention/Distraction     4
+Aggressive Driving/Road Rage       2
+Oversized Vehicle                  1
+Failure to Yield Right-of-Way      1
+Backing Unsafely                   1
+Name: CONTRIBUTING FACTOR VEHICLE 1, dtype: int64
+***************
+Unspecified                       54
+Driver Inattention/Distraction     4
+Other Vehicular                    2
+Following Too Closely              2
+Unsafe Speed                       2
+Unsafe Lane Changing               1
+Name: CONTRIBUTING FACTOR VEHICLE 2, dtype: int64
+***************
+Unspecified    7
+Name: CONTRIBUTING FACTOR VEHICLE 3, dtype: int64
+***************
+Unspecified    1
+Name: CONTRIBUTING FACTOR VEHICLE 4, dtype: int64
+***************
+Unspecified    2
+Name: CONTRIBUTING FACTOR VEHICLE 5, dtype: int64
