@@ -1,3 +1,5 @@
+__author__ = "Shachi Amitkumar Turakhia, Siddhant Reddy"
+
 import pandas as pd
 import numpy as np
 import csv

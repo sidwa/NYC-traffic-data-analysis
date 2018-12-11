@@ -1,14 +1,15 @@
+__author__ = "Shachi Amitkumar Turakhia, Siddhant Reddy"
+
+
 import pandas as pd
 import numpy as np
-import datetime as dt
 import matplotlib.pyplot as plt
 
 from util import readfile,kml_generation
 
 data = readfile("bronx.csv")
 
-# =============================================Overall
-# stats======================================
+# =============================================Overall stats======================================
 def get_overall_stats():
 	print("Total accidents:", data.shape[0])
 	print("Accidents in June 2017: ", data[np.logical_and(data.MONTH == 6, data.YEAR == 2017)].shape[0])
@@ -17,8 +18,7 @@ def get_overall_stats():
 	print("Accidents in July 2018: ", data[np.logical_and(data.MONTH == 7, data.YEAR == 2018)].shape[0])
 
 
-# ===================================Location of
-# accidents========================================
+# ===================================Location of accidents========================================
 def get_heat_map():
 	lat = data["LATITUDE"]
 	lon = data["LONGITUDE"]
@@ -26,8 +26,7 @@ def get_heat_map():
 
 
 
-# =============Getting number of accidents by the hour
-# stats=======================================
+# =============Getting number of accidents by the hour stats=======================================
 def get_acc_hour(data, plot=True):
 	hours = range(24)
 	num_accidents = []
@@ -55,8 +54,7 @@ def get_acc_hour(data, plot=True):
 
 	return (hours, num_accidents)
 
-# =======================================vehicles
-# involved============================================
+# =======================================vehicles involved============================================
 def vehicles_involved(data, plot=True):
 	"""
 		finds number of accidents involving 1,2,3,4 and 5 vehicles.
@@ -68,11 +66,6 @@ def vehicles_involved(data, plot=True):
 	"""
 	num_vehicles = {}
 	total_accidents = data.shape[0]
-
-	# creates a binary data frame where value of true is set where nulls were
-	# present.
-	# not viable since np.logical_and takes only 2 args
-	# bin_frame = data.isnull()
 
 	# accidents with 5 vehicels will def have foll col non null
 	num_vehicles[5] = total_accidents - data["CONTRIBUTING FACTOR VEHICLE 5"].isnull().sum()
@@ -119,84 +112,68 @@ def get_data_n_vehicles(data, num_vehicles):
 	res = pd.DataFrame(columns=data.columns)
 	curr_row = 0
 	for obs_idx, obs_data in data.iterrows():
-		# if num_vehicle cell has value then check further
-		
+
+		# if num_vehicle cell has value then current accident may involve num_vehicle vehicles, check further
 		if not bin_data.loc[obs_idx, "CONTRIBUTING FACTOR VEHICLE " + str(num_vehicles)]:
 			for i in range(num_vehicles + 1,6):
-				# check if more than num_vehicles were involved
 
+				# check if more than num_vehicles were involved
 				if not bin_data.loc[obs_idx, "CONTRIBUTING FACTOR VEHICLE " + str(i)]:
-					#print("break")
+					#this accident had more than num_vehicles involved
 					break
 			else:
-				# more vehicles were not involved, add to new data frame
-				#print("add")
-				#print(obs_data)
+				#this accident has exactly num_vehicle vehicles involved add to new data frame
 				res.loc[curr_row] = obs_data
 				curr_row += 1
-				#print(res.loc[res.shape[0]-1])
 	
 	return res
 
-def num_vehicle_cause():
-	"""
-		finds most often cause of accidents for a certain number of vehicles involved in accident
-	"""
-	# vehicle1_acc = pd.DataFrame(columns=data.columns)
-	# vehicle2_acc = pd.DataFrame(columns=data.columns)
-	# vehicle3_acc = pd.DataFrame(columns=data.columns)
-	# vehicle4_acc = pd.DataFrame(columns=data.columns)
-	# vehicle5_acc = pd.DataFrame(columns=data.columns)
-	
-	# for obs_idx, obs_data in data.iterrows():
-	# 	pass
-
-	print(data["CONTRIBUTING FACTOR VEHICLE 1"].unique())
-	print("***********")
-	print(data["CONTRIBUTING FACTOR VEHICLE 2"].unique())
-	print("***********")
-	print(data["CONTRIBUTING FACTOR VEHICLE 3"].unique())
-	print("***********")
-	print(data["CONTRIBUTING FACTOR VEHICLE 4"].unique())
-	print("***********")
-	print(data["CONTRIBUTING FACTOR VEHICLE 5"].unique())
-
 def get_acc_cause_time(hour, plot = True):
 	"""
-		get statitics of accidents given hour of the day
+		get cause of accidents given hour of the day
 	"""
 
 	dat = data[data.HOUR == hour]
 	
+	# new data frame with accidents involving exactly 1 vehicle
 	dat1 = get_data_n_vehicles(dat, 1)
 	dat1 = dat1.dropna(subset=["CONTRIBUTING FACTOR VEHICLE 1"])
 	print("********1******")
+	# get cause of accidents involving 1 vehicle rank them by frequency
 	print(dat1["CONTRIBUTING FACTOR VEHICLE 1"].value_counts())#value_counts().max())
 
+	# new data frame with accidents involving exactly 2 vehicles
 	dat2 = get_data_n_vehicles(dat, 2)
 	dat2 = dat2.dropna(subset=["CONTRIBUTING FACTOR VEHICLE 2"])
 	print("*******2*******")
+	# get cause of accidents involving 2 vehicles rank them by frequency
 	print(dat2["CONTRIBUTING FACTOR VEHICLE 2"].value_counts())
 	print(dat2["CONTRIBUTING FACTOR VEHICLE 1"].value_counts())
 
+	# new data frame with accidents involving exactly 3 vehicles
 	dat3 = get_data_n_vehicles(dat, 3)
 	dat3 = dat3.dropna(subset=["CONTRIBUTING FACTOR VEHICLE 3"])
 	print("*******3*******")
+	# get cause of accidents involving 3 vehicles rank them by frequency
 	print(dat3["CONTRIBUTING FACTOR VEHICLE 3"].value_counts())
 	print(dat3["CONTRIBUTING FACTOR VEHICLE 2"].value_counts())
 	print(dat3["CONTRIBUTING FACTOR VEHICLE 1"].value_counts())
 
+	# new data frame with accidents involving exactly 4 vehicles
 	dat4 = get_data_n_vehicles(dat, 4)
 	dat4 = dat4.dropna(subset=["CONTRIBUTING FACTOR VEHICLE 4"])
 	print("*******4*******")
+	# get cause of accidents involving 4 vehicles rank them by frequency
 	print(dat4["CONTRIBUTING FACTOR VEHICLE 4"].value_counts())
 	print(dat4["CONTRIBUTING FACTOR VEHICLE 3"].value_counts())
 	print(dat4["CONTRIBUTING FACTOR VEHICLE 2"].value_counts())
 	print(dat4["CONTRIBUTING FACTOR VEHICLE 1"].value_counts())
 
+	# new data frame with accidents involving exactly 5 vehicles
 	dat5 = get_data_n_vehicles(dat, 5)
 	dat5 = dat5.dropna(subset=["CONTRIBUTING FACTOR VEHICLE 5"])
 	print("******5********")
+	# get cause of accidents involving 5 vehicle rank them by frequency
 	print(dat5["CONTRIBUTING FACTOR VEHICLE 5"].value_counts())
 	print(dat5["CONTRIBUTING FACTOR VEHICLE 4"].value_counts())
 	print(dat5["CONTRIBUTING FACTOR VEHICLE 3"].value_counts())
@@ -261,8 +238,8 @@ if __name__ == "__main__":
 	#func()
 	
 	acc = []
-
-	get_acc_cause_time(14)
+	main()
+	#get_acc_cause_time(14)
 
 
 	#************get month by month comparison of hourly accident stats **********
